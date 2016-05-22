@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Source/Fluffy_Breakdowns/.vs/Fluffy_Breakdowns/v14
+/Source/Fluffy_Breakdowns/obj
