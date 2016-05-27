@@ -19,6 +19,8 @@ namespace Fluffy_Breakdowns
         private static Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
         private static List<DurabilityPair> _durabilityScribeHelper;
 
+        static Dictionary<string, DurabilityPair> asd;
+
         #endregion Fields
 
         public class DurabilityPair : IExposable
@@ -75,7 +77,7 @@ namespace Fluffy_Breakdowns
                 foreach( var helper in _durabilityScribeHelper )
                 {
                     var comp = helper?.thing?.TryGetComp<CompBreakdownable>();
-                    if ( comp != null )
+                    if ( comp != null && !_durabilities.ContainsKey( comp ) )
                     {
                         _durabilities.Add( comp, helper.durability );
                     }
