@@ -21,7 +21,7 @@ namespace Fluffy_Breakdowns
             if ( thing.Faction != pawn.Faction )
                 return false;
 
-            if ( pawn.Faction == Faction.OfColony && !Find.AreaHome[thing.Position] )
+            if ( pawn.Faction == Faction.OfPlayer && !Find.AreaHome[thing.Position] )
                 return false;
 
             if ( thing.IsBurning() )

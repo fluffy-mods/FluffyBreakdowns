@@ -18,9 +18,7 @@ namespace Fluffy_Breakdowns
         private const float maintenanceThreshold = .9f;
         private static Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
         private static List<DurabilityPair> _durabilityScribeHelper;
-
-        static Dictionary<string, DurabilityPair> asd;
-
+        
         #endregion Fields
 
         public class DurabilityPair : IExposable
