@@ -43,9 +43,13 @@ namespace Fluffy_Breakdowns
             {
                 var pawn = maintenance.actor;
                 durability += pawn.GetStatValue( StatDefOf.ConstructionSpeed ) / fullRepairTicks;
+                pawn.skills.Learn( SkillDefOf.Construction, 0.125f );
 
                 if ( durability > .99f )
+                {
                     EndJobWith( JobCondition.Succeeded );
+                    pawn.records.Increment( RecordDefOf.ThingsRepaired );
+                }
             };
             maintenance.WithEffect( TargetThingA.def.repairEffect, TargetIndex.A );
             maintenance.defaultCompleteMode = ToilCompleteMode.Never;

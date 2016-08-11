@@ -59,7 +59,7 @@ namespace Fluffy_Breakdowns
 
         public override bool ShouldSkip( Pawn pawn )
         {
-            return MapComponent_Durability.potentialMaintenanceThings.Count() == 0;
+            return !MapComponent_Durability.potentialMaintenanceThings.Any();
         }
 
         #endregion Methods
