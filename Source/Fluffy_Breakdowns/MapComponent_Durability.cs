@@ -14,14 +14,15 @@ namespace Fluffy_Breakdowns
     {
         #region Fields
 
-        public const int componentLifetime = GenDate.TicksPerDay;
+        private const int _componentLifetime = GenDate.TicksPerSeason;
         public const float notUsedFactor = 1 / 3f;
+        public static float componentLifetimeFactor = 1f;
         private const int _moteIntervalRequiresCriticalRepair = 15;
         private const int _moteIntervalRequiresRepair = 30;
-        public static float maintenanceThreshold = .9f;
         private static Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
         private static List<DurabilityPair> _durabilityScribeHelper;
-        private bool first = true;
+
+        public static int ComponentLifetime => (int)(_componentLifetime * componentLifetimeFactor);
 
         #endregion Fields
 
@@ -109,7 +110,7 @@ namespace Fluffy_Breakdowns
 
         public static bool RequiresMaintenance( CompBreakdownable comp )
         {
-            return GetDurability( comp ) < maintenanceThreshold;
+            return GetDurability( comp ) < ModConfigurationMenu_Breakdowns.maintenanceThreshold;
         }
 
         public static void SetDurability( CompBreakdownable comp, float durability )

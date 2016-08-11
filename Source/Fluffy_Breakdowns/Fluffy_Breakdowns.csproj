@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JobDriver_Maintenance.cs" />
+    <Compile Include="ModConfigurationMenu_Breakdowns.cs" />
     <Compile Include="SpecialInjector_Detours.cs" />
     <Compile Include="CompMaintainanceBreakdown.cs" />
     <Compile Include="MapComponent_Durability.cs" />

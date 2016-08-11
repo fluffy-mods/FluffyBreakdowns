@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<FluffyBreakdowns.Maintenance>Maintenance: {0}</FluffyBreakdowns.Maintenance>
+	<FluffyBreakdowns.MaintenanceThreshold>Maintenance threshold: {0}</FluffyBreakdowns.MaintenanceThreshold>
+	<FluffyBreakdowns.MaintenanceThresholdTip>Colonists with the repair skill will start repairing buildings when maintenance is below this threshold.</FluffyBreakdowns.MaintenanceThresholdTip>
+
+</LanguageData>

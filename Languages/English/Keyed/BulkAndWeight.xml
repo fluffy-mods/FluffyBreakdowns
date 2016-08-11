@@ -2,5 +2,8 @@
 <LanguageData>
 
 	<FluffyBreakdowns.Maintenance>Maintenance: {0}</FluffyBreakdowns.Maintenance>
+	<FluffyBreakdowns.MaintenanceThreshold>Maintenance threshold: {0}</FluffyBreakdowns.MaintenanceThreshold>
+	<FluffyBreakdowns.MaintenanceThresholdTip>Colonists with the repair skill will start repairing buildings when maintenance is below this threshold.</FluffyBreakdowns.MaintenanceThresholdTip>
+	<FluffyBreakdowns.LowMaintenanceThreshold>Threshold very low. Components will run the risk of breaking down!</FluffyBreakdowns.LowMaintenanceThreshold>
 
 </LanguageData>

@@ -7,9 +7,9 @@ namespace Fluffy_Breakdowns
     public class CompBreakdownableMaintenance : CompBreakdownable
     {
         #region Properties
-        private int componentLifetime => MapComponent_Durability.componentLifetime;
+        private int componentLifetime => MapComponent_Durability.ComponentLifetime;
         private int checkinterval => BreakdownManager.CheckIntervalTicks;
-        private float lastFuelAmount = 0f;
+        //private float lastFuelAmount = 0f;
 
         private float durability
         {

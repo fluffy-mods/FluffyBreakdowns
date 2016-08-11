@@ -7,5 +7,11 @@
         <SpecialInjectors>
             <li>Fluffy_Breakdowns.SpecialInjector_Detours</li>
         </SpecialInjectors>
+        <ModConfigurationMenus> 
+            <li>
+                <label>Fluffy Breakdowns</label>
+                <mcmClass>Fluffy_Breakdowns.ModConfigurationMenu_Breakdowns</mcmClass>
+            </li>
+        </ModConfigurationMenus>
     </CommunityCoreLibrary.ModHelperDef>
 </Defs>
