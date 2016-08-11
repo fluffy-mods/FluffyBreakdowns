@@ -12,7 +12,7 @@ namespace Fluffy_Breakdowns
     {
         #region Fields
 
-        public const int componentLifetime = GenDate.TicksPerSeason;
+        public const int componentLifetime = GenDate.TicksPerDay;
         private const int _moteIntervalRequiresCriticalRepair = 15;
         private const int _moteIntervalRequiresRepair = 30;
         private const float maintenanceThreshold = .9f;
@@ -135,6 +135,7 @@ namespace Fluffy_Breakdowns
             base.MapComponentTick();
 
             int tick = Find.TickManager.TicksGame;
+            List<CompBreakdownable> orphaned = new List<CompBreakdownable>();
 
             foreach ( var _dur in _durabilities )
             {
@@ -143,12 +144,24 @@ namespace Fluffy_Breakdowns
                 if ( comp?.parent?.Spawned ?? false )
                 {
                     if ( durability < .5 && ( tick + comp.GetHashCode() ) % _moteIntervalRequiresRepair == 0 )
-                        MoteThrower.ThrowSmoke( comp.parent.DrawPos, ( 1f - durability ) * 1/2f );
+                        MoteThrower.ThrowSmoke( comp.parent.DrawPos, ( 1f - durability ) * 1 / 2f );
 
                     if ( durability < .25 && ( tick + comp.GetHashCode() ) % _moteIntervalRequiresCriticalRepair == 0 )
                         MoteThrower.ThrowMicroSparks( comp.parent.DrawPos );
                 }
+
+                // can't simply use !Spawned, since that would allow resetting durability by moving furniture.
+                if ( comp?.parent?.DestroyedOrNull() ?? true )
+                {
+                    // mark for removal
+                    orphaned.Add( comp );
+                }
             }
+
+            // remove
+            foreach ( var comp in orphaned )
+                _durabilities.Remove( comp );
+
         }
 
         #endregion Methods
