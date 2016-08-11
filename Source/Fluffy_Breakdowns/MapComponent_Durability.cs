@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 using System;
+using System.Security.Policy;
+using CommunityCoreLibrary;
 
 namespace Fluffy_Breakdowns
 {
@@ -13,12 +15,14 @@ namespace Fluffy_Breakdowns
         #region Fields
 
         public const int componentLifetime = GenDate.TicksPerDay;
+        public const float notUsedFactor = 1 / 3f;
         private const int _moteIntervalRequiresCriticalRepair = 15;
         private const int _moteIntervalRequiresRepair = 30;
-        private const float maintenanceThreshold = .9f;
+        public static float maintenanceThreshold = .9f;
         private static Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
         private static List<DurabilityPair> _durabilityScribeHelper;
-        
+        private bool first = true;
+
         #endregion Fields
 
         public class DurabilityPair : IExposable
@@ -133,7 +137,7 @@ namespace Fluffy_Breakdowns
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-
+            
             int tick = Find.TickManager.TicksGame;
             List<CompBreakdownable> orphaned = new List<CompBreakdownable>();
 

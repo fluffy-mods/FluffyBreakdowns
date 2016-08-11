@@ -3,7 +3,7 @@
     <CommunityCoreLibrary.ModHelperDef>
         <defName>Fluffy_Breakdowns</defName>
         <ModName>Fluffy Breakdowns</ModName>
-        <minCCLVersion>0.14.0</minCCLVersion>
+        <minCCLVersion>0.14.2</minCCLVersion>
         <SpecialInjectors>
             <li>Fluffy_Breakdowns.SpecialInjector_Detours</li>
         </SpecialInjectors>
