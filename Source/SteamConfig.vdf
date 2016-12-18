@@ -1,0 +1,40 @@
+
+"workshopitem"
+{
+  "appid" "294100"
+  "contentfolder" "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Fluffy_Breakdowns"
+  "previewfile" "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Fluffy_Breakdowns\About\Preview.png"
+  "visibilitiy" "0"
+  "title" "Fluffy Breakdowns"
+  "description" "Replaces random breakdowns with a maintenance requirement.
+
+[h1]Features[/h1]
+Buildings using components will now gradually deteriorate. The odds of a breakdown happening (and requiring replacement components), is directly linked to the amount of deterioration.
+
+To keep your machinery in top shape, your colonists with the repair work enabled will periodically maintain components. As long as components are properly maintained, they cannot randomly break down.
+
+[h1]Notes[/h1]
+I’m very interested in any feedback on how these changes affect the difficulty of the game. I’ve tried to balance it so that it’s not too hard/easy - but I’m just one person with one playstyle.
+
+[h1]Think you found a bug?[/h1]
+Please read [url=http://steamcommunity.com/sharedfiles/filedetails/?id=725234314]this guide[/url] before creating a bug report, and then create a bug report [url=https://github.com/FluffierThanThou/Fluffy_Breakdowns/issues]here[/url]
+
+[h1]Older versions[/h1]
+All current and past versions of this mod can be downloaded from [url=https://github.com/FluffierThanThou/Fluffy_Breakdowns/releases]GitHub[/url].
+
+[h1]License[/h1]
+This mod is licensed under the Creative Commons [url=http://creativecommons.org/licenses/by-nc-sa/4.0/]by-nc-sa 4.0 Int[/url] license.
+
+[h1]Contributors[/h1]
+FluffierThanThou
+
+FluffierThanThou
+
+[h1]Version[/h1]
+This is version v0.16.0.0
+
+"
+  "changenote" ""
+  "publishedfileid" "726244033"
+}
+
