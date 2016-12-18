@@ -12,6 +12,8 @@ namespace Fluffy_Breakdowns
 {
     public class Controller : ModBase
     {
+        public Controller() { }
+
         public static SettingHandle<int> MaintenanceThresholdHandle;
         public static SettingHandle<bool> MaintenanceHomeOnly;
         private string _modIdentifier = "FluffyBreakdowns";

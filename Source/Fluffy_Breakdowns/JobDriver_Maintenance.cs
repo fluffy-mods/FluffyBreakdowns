@@ -24,8 +24,7 @@ namespace Fluffy_Breakdowns
         {
             yield return Toils_Reserve.Reserve( TargetIndex.A ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
             yield return
-                Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A )
-                ;
+                Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
 
             var maintenance = new Toil();
             maintenance.tickAction = delegate
