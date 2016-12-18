@@ -1,20 +1,27 @@
-using CommunityCoreLibrary.UI;
-using RimWorld;
+// // Karel Kroeze
+// // MapComponent_Durability.cs
+// // 2016-12-18
+
 using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using UnityEngine;
 using Verse;
-using System;
-using System.Security.Policy;
-using CommunityCoreLibrary;
 
 namespace Fluffy_Breakdowns
 {
     public class MapComponent_Durability : MapComponent
     {
+        public MapComponent_Durability( Map map ) : base( map ) { }
+
         #region Fields
 
+#if DEBUG
+        private const int _componentLifetime = GenDate.TicksPerDay;
+#else
         private const int _componentLifetime = GenDate.TicksPerSeason;
+#endif
+
         public const float notUsedFactor = 1 / 3f;
         public static float componentLifetimeFactor = 1f;
         private const int _moteIntervalRequiresCriticalRepair = 15;
@@ -22,14 +29,14 @@ namespace Fluffy_Breakdowns
         private static Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
         private static List<DurabilityPair> _durabilityScribeHelper;
 
-        public static int ComponentLifetime => (int)(_componentLifetime * componentLifetimeFactor);
+        public static int ComponentLifetime => (int) ( _componentLifetime * componentLifetimeFactor );
 
         #endregion Fields
 
         public class DurabilityPair : IExposable
         {
-            public ThingWithComps thing;
             public float durability = 1f;
+            public ThingWithComps thing;
 
             public DurabilityPair()
             {
@@ -66,18 +73,19 @@ namespace Fluffy_Breakdowns
         public override void ExposeData()
         {
             // create a list of saveable thing/durability pairs
-            if (Scribe.mode == LoadSaveMode.Saving )
+            if ( Scribe.mode == LoadSaveMode.Saving )
             {
-                _durabilityScribeHelper = _durabilities.Select( pair => new DurabilityPair( pair.Key.parent, pair.Value ) ).ToList();
+                _durabilityScribeHelper =
+                    _durabilities.Select( pair => new DurabilityPair( pair.Key.parent, pair.Value ) ).ToList();
             }
 
             // save/load the list
             Scribe_Collections.LookList( ref _durabilityScribeHelper, "durabilities", LookMode.Deep );
 
             // reconstruct durability dictionary from saved list
-            if (Scribe.mode == LoadSaveMode.PostLoadInit )
+            if ( Scribe.mode == LoadSaveMode.PostLoadInit )
             {
-                foreach( var helper in _durabilityScribeHelper )
+                foreach ( DurabilityPair helper in _durabilityScribeHelper )
                 {
                     var comp = helper?.thing?.TryGetComp<CompBreakdownable>();
                     if ( comp != null && !_durabilities.ContainsKey( comp ) )
@@ -101,7 +109,7 @@ namespace Fluffy_Breakdowns
 
         public static float GetDurability( Building building )
         {
-            CompBreakdownable comp = building.TryGetComp<CompBreakdownable>();
+            var comp = building.TryGetComp<CompBreakdownable>();
             if ( comp == null )
                 return 1f;
             else
@@ -110,7 +118,7 @@ namespace Fluffy_Breakdowns
 
         public static bool RequiresMaintenance( CompBreakdownable comp )
         {
-            return GetDurability( comp ) < ModConfigurationMenu_Breakdowns.maintenanceThreshold;
+            return GetDurability( comp ) < Controller.MaintenanceThreshold;
         }
 
         public static void SetDurability( CompBreakdownable comp, float durability )
@@ -120,7 +128,7 @@ namespace Fluffy_Breakdowns
 
         public static void SetDurability( Building building, float durability )
         {
-            CompBreakdownable comp = building.TryGetComp<CompBreakdownable>();
+            var comp = building.TryGetComp<CompBreakdownable>();
             if ( comp != null )
                 SetDurability( comp, durability );
         }
@@ -131,28 +139,28 @@ namespace Fluffy_Breakdowns
             base.MapComponentOnGUI();
 
             Rect statusRect = new Rect( 0f, Screen.height * 1/3f, Screen.width * 1/2f, Screen.height * 1/3f );
-            CCL_Widgets.Label( statusRect, _durabilities.Select( p => p.Key.parent.LabelCap + ": " + p.Value.ToStringPercent() ).StringJoin( "\n" ) );
+            Widgets.Label( statusRect, string.Join( "\n", _durabilities.Select( p => p.Key.parent.LabelCap + ": " + p.Value.ToStringPercent() ).ToArray() ) );
         }
 #endif
 
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-            
-            int tick = Find.TickManager.TicksGame;
-            List<CompBreakdownable> orphaned = new List<CompBreakdownable>();
 
-            foreach ( var _dur in _durabilities )
+            int tick = Find.TickManager.TicksGame;
+            var orphaned = new List<CompBreakdownable>();
+
+            foreach ( KeyValuePair<CompBreakdownable, float> _dur in _durabilities )
             {
                 float durability = _dur.Value;
-                var comp = _dur.Key;
+                CompBreakdownable comp = _dur.Key;
                 if ( comp?.parent?.Spawned ?? false )
                 {
                     if ( durability < .5 && ( tick + comp.GetHashCode() ) % _moteIntervalRequiresRepair == 0 )
-                        MoteThrower.ThrowSmoke( comp.parent.DrawPos, ( 1f - durability ) * 1 / 2f );
+                        MoteMaker.ThrowSmoke( comp.parent.DrawPos, map, ( 1f - durability ) * 1 / 2f );
 
                     if ( durability < .25 && ( tick + comp.GetHashCode() ) % _moteIntervalRequiresCriticalRepair == 0 )
-                        MoteThrower.ThrowMicroSparks( comp.parent.DrawPos );
+                        MoteMaker.ThrowMicroSparks( comp.parent.DrawPos, map );
                 }
 
                 // can't simply use !Spawned, since that would allow resetting durability by moving furniture.
@@ -164,9 +172,8 @@ namespace Fluffy_Breakdowns
             }
 
             // remove
-            foreach ( var comp in orphaned )
+            foreach ( CompBreakdownable comp in orphaned )
                 _durabilities.Remove( comp );
-
         }
 
         #endregion Methods

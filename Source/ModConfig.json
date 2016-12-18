@@ -1,0 +1,20 @@
+{
+    "name": "Fluffy Breakdowns",
+    "version": {
+        "phase": 0,
+        "alpha": 16,
+        "major": 0,
+        "minor": 0
+    },
+    "visibility": 0,
+    "git_repo": "Fluffy_Breakdowns",
+    "git_user": "FluffierThanThou",
+    "contributors": [
+        "FluffierThanThou"
+    ],
+    "changenote": "",
+    "tags": [
+        "Fluffylicious"
+    ],
+    "publishedfileid": "726244033"
+}

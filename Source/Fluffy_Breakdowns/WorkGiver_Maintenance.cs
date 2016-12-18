@@ -1,6 +1,11 @@
-using RimWorld;
+// // Karel Kroeze
+// // WorkGiver_Maintenance.cs
+// // 2016-12-18
+
 using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -21,16 +26,17 @@ namespace Fluffy_Breakdowns
             if ( thing.Faction != pawn.Faction )
                 return false;
 
-            if ( pawn.Faction == Faction.OfPlayer && !Find.AreaHome[thing.Position] )
+            if ( pawn.Faction == Faction.OfPlayer && Controller.MaintenanceHomeOnly &&
+                 !pawn.Map.areaManager.Home[thing.Position] )
                 return false;
 
             if ( thing.IsBurning() )
                 return false;
 
-            if ( Find.DesignationManager.DesignationOn( thing, DesignationDefOf.Deconstruct ) != null )
+            if ( thing.Map.designationManager.DesignationOn( thing, DesignationDefOf.Deconstruct ) != null )
                 return false;
 
-            ThingWithComps twc = thing as ThingWithComps;
+            var twc = thing as ThingWithComps;
             if ( twc == null )
                 return false;
 
@@ -47,10 +53,7 @@ namespace Fluffy_Breakdowns
             return true;
         }
 
-        public override Job JobOnThing( Pawn pawn, Thing thing )
-        {
-            return new Job( JobDefOf_Maintain, thing );
-        }
+        public override Job JobOnThing( Pawn pawn, Thing thing ) { return new Job( JobDefOf_Maintain, thing ); }
 
         public override IEnumerable<Thing> PotentialWorkThingsGlobal( Pawn Pawn )
         {

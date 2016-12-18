@@ -2,7 +2,10 @@
 <LanguageData>
 
 	<FluffyBreakdowns.Maintenance>Maintenance: {0}</FluffyBreakdowns.Maintenance>
-	<FluffyBreakdowns.MaintenanceThreshold>Maintenance threshold: {0}</FluffyBreakdowns.MaintenanceThreshold>
+	<FluffyBreakdowns.MaintenanceThreshold>Maintenance threshold (%)</FluffyBreakdowns.MaintenanceThreshold>
 	<FluffyBreakdowns.MaintenanceThresholdTip>Colonists with the repair skill will start repairing buildings when maintenance is below this threshold.</FluffyBreakdowns.MaintenanceThresholdTip>
+	<FluffyBreakdowns.LowMaintenanceThreshold>Warning: Threshold very low!</FluffyBreakdowns.LowMaintenanceThreshold>
 
+	<FluffyBreakdowns.MaintenanceHome>Maintain home only</FluffyBreakdowns.MaintenanceHome>
+	<FluffyBreakdowns.MaintenanceHomeTip>If disabled, colonists will maintain equipment whereever it is.</FluffyBreakdowns.MaintenanceHomeTip>
 </LanguageData>

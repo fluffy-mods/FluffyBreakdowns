@@ -1,5 +1,10 @@
-using RimWorld;
+// // Karel Kroeze
+// // JobDriver_Maintenance.cs
+// // 2016-12-18
+
 using System.Collections.Generic;
+using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -13,49 +18,46 @@ namespace Fluffy_Breakdowns
 
         #endregion Fields
 
-        #region Properties
-
-        public CompBreakdownable comp => TargetA.Thing?.TryGetComp<CompBreakdownable>();
-
-        public float durability
-        {
-            get
-            {
-                return MapComponent_Durability.GetDurability( comp );
-            }
-            set
-            {
-                MapComponent_Durability.SetDurability( comp, value );
-            }
-        }
-
-        #endregion Properties
-
         #region Methods
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
             yield return Toils_Reserve.Reserve( TargetIndex.A ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
-            yield return Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
+            yield return
+                Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A )
+                ;
 
-            Toil maintenance = new Toil();
+            var maintenance = new Toil();
             maintenance.tickAction = delegate
-            {
-                var pawn = maintenance.actor;
-                durability += pawn.GetStatValue( StatDefOf.ConstructionSpeed ) / fullRepairTicks;
-                pawn.skills.Learn( SkillDefOf.Construction, 0.125f );
+                                         {
+                                             Pawn pawn = maintenance.actor;
+                                             durability += pawn.GetStatValue( StatDefOf.ConstructionSpeed ) /
+                                                           fullRepairTicks;
+                                             pawn.skills.Learn( SkillDefOf.Construction, 0.125f );
 
-                if ( durability > .99f )
-                {
-                    EndJobWith( JobCondition.Succeeded );
-                    pawn.records.Increment( RecordDefOf.ThingsRepaired );
-                }
-            };
+                                             if ( durability > .99f )
+                                             {
+                                                 EndJobWith( JobCondition.Succeeded );
+                                                 pawn.records.Increment( RecordDefOf.ThingsRepaired );
+                                             }
+                                         };
             maintenance.WithEffect( TargetThingA.def.repairEffect, TargetIndex.A );
             maintenance.defaultCompleteMode = ToilCompleteMode.Never;
             yield return maintenance;
         }
 
         #endregion Methods
+
+        #region Properties
+
+        public CompBreakdownable comp => TargetA.Thing?.TryGetComp<CompBreakdownable>();
+
+        public float durability
+        {
+            get { return MapComponent_Durability.GetDurability( comp ); }
+            set { MapComponent_Durability.SetDurability( comp, value ); }
+        }
+
+        #endregion Properties
     }
 }
