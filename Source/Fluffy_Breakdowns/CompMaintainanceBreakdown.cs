@@ -2,7 +2,7 @@
 // // CompMaintainanceBreakdown.cs
 // // 2016-12-18
 
-using HugsLib.DetourByAttribute;
+using HugsLib.Source.Detour;
 using RimWorld;
 using UnityEngine;
 using Verse;
