@@ -17,21 +17,30 @@ namespace Fluffy_Breakdowns
         #region Fields
 
 #if DEBUG
-        private const int _componentLifetime = GenDate.TicksPerDay;
+        private static int _componentLifetime = GenDate.TicksPerDay;
 #else
-        private const int _componentLifetime = GenDate.TicksPerSeason;
+        private static int _componentLifetime = GenDate.TicksPerSeason;
 #endif
 
         public const float notUsedFactor = 1 / 3f;
-        public static float componentLifetimeFactor = 1f;
         private const int _moteIntervalRequiresCriticalRepair = 15;
         private const int _moteIntervalRequiresRepair = 30;
         private static Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
         private static List<DurabilityPair> _durabilityScribeHelper;
 
-        public static int ComponentLifetime => (int) ( _componentLifetime * componentLifetimeFactor );
+        public static int ComponentLifetime
+        {
+            get { return _componentLifetime; }
+            set
+            {
+                _componentLifetime = value;
+#if DEBUG
+                Log.Message( $"ComponentLifetime set to {value}");
+#endif
+            }
+        }
 
-        #endregion Fields
+#endregion Fields
 
         public class DurabilityPair : IExposable
         {
@@ -56,7 +65,7 @@ namespace Fluffy_Breakdowns
             }
         }
 
-        #region Properties
+#region Properties
 
         public static IEnumerable<Thing> potentialMaintenanceThings
         {
@@ -66,9 +75,9 @@ namespace Fluffy_Breakdowns
             }
         }
 
-        #endregion Properties
+#endregion Properties
 
-        #region Methods
+#region Methods
 
         public override void ExposeData()
         {
@@ -176,6 +185,6 @@ namespace Fluffy_Breakdowns
                 _durabilities.Remove( comp );
         }
 
-        #endregion Methods
+#endregion Methods
     }
 }

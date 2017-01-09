@@ -55,6 +55,7 @@
     <Compile Include="CompMaintainanceBreakdown.cs" />
     <Compile Include="MapComponent_Durability.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResearchWorkers.cs" />
     <Compile Include="WorkGiver_Maintenance.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

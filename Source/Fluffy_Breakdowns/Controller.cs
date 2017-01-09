@@ -49,6 +49,9 @@ namespace Fluffy_Breakdowns
             MaintenanceHomeOnly = Settings.GetHandle( "maintenanceHome",
                                                       "FluffyBreakdowns.MaintenanceHome".Translate(),
                                                       "FluffyBreakdowns.MaintenanceHomeTip".Translate(), true );
+
+            // manually set the researchMod actions
+            TynanPlease.SetActions();
         }
 
         private bool WarningDrawer( Rect canvas )
