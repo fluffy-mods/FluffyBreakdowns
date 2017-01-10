@@ -57,7 +57,7 @@ namespace Fluffy_Breakdowns
 
         // Tynan, please.
         // todo: change to override when vanilla is fixed.
-        public new void Apply() { MapComponent_Durability.ComponentLifetime = GenDate.DaysPerSeason * 2; }
+        public new void Apply() { MapComponent_Durability.ComponentLifetime = GenDate.TicksPerSeason * 2; }
     }
 
     public class ComponentLifetimeTwo : ResearchMod
@@ -78,6 +78,6 @@ namespace Fluffy_Breakdowns
 
         // Tynan, please.
         // todo: change to override when vanilla is fixed.
-        public new void Apply() { MapComponent_Durability.ComponentLifetime = GenDate.DaysPerYear; }
+        public new void Apply() { MapComponent_Durability.ComponentLifetime = GenDate.TicksPerYear; }
     }
 }
