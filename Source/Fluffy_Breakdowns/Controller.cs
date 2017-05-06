@@ -2,68 +2,48 @@
 // // Controller.cs
 // // 2016-12-18
 
-using HugsLib;
-using HugsLib.Settings;
+using System.Reflection;
+using Harmony;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace Fluffy_Breakdowns
 {
-    public class Controller : ModBase
+    public class Controller : Mod
     {
-        public Controller() { }
-
-        public static SettingHandle<int> MaintenanceThresholdHandle;
-        public static SettingHandle<bool> MaintenanceHomeOnly;
-        private string _modIdentifier = "FluffyBreakdowns";
-
-        public override string ModIdentifier
+        public Controller( ModContentPack content ) : base( content )
         {
-            get { return _modIdentifier; }
+            // detour CheckForBreakdown
+            var harmony = HarmonyInstance.Create( "fluffy.breakdowns" );
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+
+            // provide settings
+            Settings = GetSettings<Settings>();
+
+            Log.Message( $"Fluffy Breakdowns :: Initialized" );
         }
 
-        public static float MaintenanceThreshold => MaintenanceThresholdHandle / 100f;
+        public static Settings Settings;
+        public static int CheckInterval = BreakdownManager.CheckIntervalTicks;
 
-        public override void MapLoaded( Map map )
-        {
-            base.MapLoaded( map );
+#if DEBUG
+        public static int ComponentLifetime = GenDate.TicksPerDay;
+#else
+        public static int ComponentLifetime = GenDate.TicksPerSeason;
+#endif
 
-            if ( map.GetComponent<MapComponent_Durability>() == null )
-                map.components.Add( new MapComponent_Durability( map ) );
-        }
+        public override string SettingsCategory() { return "Fluffy Breakdowns"; }
+        public override void DoSettingsWindowContents( Rect canvas ) { Settings.DoWindowContents( canvas ); }
 
-        public override void DefsLoaded()
-        {
-            MaintenanceThresholdHandle = Settings.GetHandle( "maintenanceThreshold",
-                                                             "FluffyBreakdowns.MaintenanceThreshold".Translate(),
-                                                             "FluffyBreakdowns.MaintenanceThresholdTip".Translate(), 70,
-                                                             Validators.IntRangeValidator( 0, 100 ) );
+        // todo; verify that vanilla now correctly injects new (map)components into existing save games.
+        //public override void MapLoaded( Map map )
+        //{
+        //    base.MapLoaded( map );
 
-            // set up warning for low maintenance threshold.
-            SettingHandle<bool> Warning = Settings.GetHandle( "maintenanceThresholdWarning", "", null, false );
-            Warning.Unsaved = true;
-            Warning.CustomDrawer = WarningDrawer;
-            Warning.VisibilityPredicate = () => MaintenanceThreshold < .3f;
-
-            MaintenanceHomeOnly = Settings.GetHandle( "maintenanceHome",
-                                                      "FluffyBreakdowns.MaintenanceHome".Translate(),
-                                                      "FluffyBreakdowns.MaintenanceHomeTip".Translate(), true );
-
-            // manually set the researchMod actions
-            TynanPlease.SetActions();
-        }
-
-        private bool WarningDrawer( Rect canvas )
-        {
-            TextAnchor oldAnchor = Text.Anchor;
-            Text.Anchor = TextAnchor.MiddleCenter;
-            Color oldColor = GUI.color;
-            GUI.color = Color.red;
-            Widgets.Label( canvas, "FluffyBreakdowns.LowMaintenanceThreshold".Translate() );
-            Text.Anchor = oldAnchor;
-            GUI.color = oldColor;
-            return false;
-        }
+        //    if ( map.GetComponent<MapComponent_Durability>() == null )
+        //        map.components.Add( new MapComponent_Durability( map ) );
+        //}
+        
     }
 }

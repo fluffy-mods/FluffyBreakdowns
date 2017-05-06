@@ -15,6 +15,7 @@ namespace Fluffy_Breakdowns
         #region Fields
 
         public const int fullRepairTicks = GenDate.TicksPerHour;
+        public float startingDurability;
 
         #endregion Fields
 
@@ -26,6 +27,7 @@ namespace Fluffy_Breakdowns
             yield return
                 Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
 
+            startingDurability = durability;
             var maintenance = new Toil();
             maintenance.tickAction = delegate
                                          {
@@ -41,8 +43,15 @@ namespace Fluffy_Breakdowns
                                              }
                                          };
             maintenance.WithEffect( TargetThingA.def.repairEffect, TargetIndex.A );
+            maintenance.WithProgressBar( TargetIndex.A, progress, true );
             maintenance.defaultCompleteMode = ToilCompleteMode.Never;
             yield return maintenance;
+        }
+
+        public float progress()
+        {
+            // actual progress / possible progress
+            return ( durability - startingDurability ) / ( 1f - startingDurability );
         }
 
         #endregion Methods
@@ -53,8 +62,8 @@ namespace Fluffy_Breakdowns
 
         public float durability
         {
-            get { return MapComponent_Durability.GetDurability( comp ); }
-            set { MapComponent_Durability.SetDurability( comp, value ); }
+            get { return MapComponent_Durability.ForMap( comp.parent.Map ).GetDurability( comp ); }
+            set { MapComponent_Durability.ForMap( comp.parent.Map ).SetDurability( comp, value ); }
         }
 
         #endregion Properties

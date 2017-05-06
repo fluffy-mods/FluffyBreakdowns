@@ -8,37 +8,32 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
+// todo: split off config/static parts into a gameComponent
+
 namespace Fluffy_Breakdowns
 {
     public class MapComponent_Durability : MapComponent
     {
         public MapComponent_Durability( Map map ) : base( map ) { }
 
-        #region Fields
+        public static MapComponent_Durability ForMap( Map map )
+        {
+            var comp = map.GetComponent<MapComponent_Durability>();
+            if ( comp == null )
+            {
+                comp = new MapComponent_Durability( map );
+                map.components.Add( comp );
+            }
+            return comp;
+        }
 
-#if DEBUG
-        private static int _componentLifetime = GenDate.TicksPerDay;
-#else
-        private static int _componentLifetime = GenDate.TicksPerSeason;
-#endif
+        #region Fields
 
         public const float notUsedFactor = 1 / 3f;
         private const int _moteIntervalRequiresCriticalRepair = 15;
         private const int _moteIntervalRequiresRepair = 30;
-        private static Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
-        private static List<DurabilityPair> _durabilityScribeHelper;
-
-        public static int ComponentLifetime
-        {
-            get { return _componentLifetime; }
-            set
-            {
-                _componentLifetime = value;
-#if DEBUG
-                Log.Message( $"ComponentLifetime set to {value}");
-#endif
-            }
-        }
+        private Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
+        private List<DurabilityPair> _durabilityScribeHelper;
 
 #endregion Fields
 
@@ -60,14 +55,14 @@ namespace Fluffy_Breakdowns
 
             public void ExposeData()
             {
-                Scribe_References.LookReference( ref thing, "thing" );
-                Scribe_Values.LookValue( ref durability, "durability" );
+                Scribe_References.Look( ref thing, "thing" );
+                Scribe_Values.Look( ref durability, "durability" );
             }
         }
 
 #region Properties
 
-        public static IEnumerable<Thing> potentialMaintenanceThings
+        public IEnumerable<Thing> potentialMaintenanceThings
         {
             get
             {
@@ -89,7 +84,7 @@ namespace Fluffy_Breakdowns
             }
 
             // save/load the list
-            Scribe_Collections.LookList( ref _durabilityScribeHelper, "durabilities", LookMode.Deep );
+            Scribe_Collections.Look( ref _durabilityScribeHelper, "durabilities", LookMode.Deep );
 
             // reconstruct durability dictionary from saved list
             if ( Scribe.mode == LoadSaveMode.PostLoadInit )
@@ -105,7 +100,7 @@ namespace Fluffy_Breakdowns
             }
         }
 
-        public static float GetDurability( CompBreakdownable comp )
+        public float GetDurability( CompBreakdownable comp )
         {
             float durability;
             if ( !_durabilities.TryGetValue( comp, out durability ) )
@@ -116,7 +111,7 @@ namespace Fluffy_Breakdowns
             return durability;
         }
 
-        public static float GetDurability( Building building )
+        public float GetDurability( Building building )
         {
             var comp = building.TryGetComp<CompBreakdownable>();
             if ( comp == null )
@@ -125,17 +120,17 @@ namespace Fluffy_Breakdowns
                 return GetDurability( comp );
         }
 
-        public static bool RequiresMaintenance( CompBreakdownable comp )
+        public bool RequiresMaintenance( CompBreakdownable comp )
         {
-            return GetDurability( comp ) < Controller.MaintenanceThreshold;
+            return GetDurability( comp ) < Controller.Settings.MaintenanceThreshold;
         }
 
-        public static void SetDurability( CompBreakdownable comp, float durability )
+        public void SetDurability( CompBreakdownable comp, float durability )
         {
             _durabilities[comp] = Mathf.Clamp( durability, .001f, 1f );
         }
 
-        public static void SetDurability( Building building, float durability )
+        public void SetDurability( Building building, float durability )
         {
             var comp = building.TryGetComp<CompBreakdownable>();
             if ( comp != null )
@@ -147,8 +142,12 @@ namespace Fluffy_Breakdowns
         {
             base.MapComponentOnGUI();
 
-            Rect statusRect = new Rect( 0f, Screen.height * 1/3f, Screen.width * 1/2f, Screen.height * 1/3f );
-            Widgets.Label( statusRect, string.Join( "\n", _durabilities.Select( p => p.Key.parent.LabelCap + ": " + p.Value.ToStringPercent() ).ToArray() ) );
+            string status = $"Threshold: {Controller.Settings.MaintenanceThreshold}\nHomeOnly: {Controller.Settings.MaintainHomeOnly}\n";
+            status += $"ComponentLifetime: {Controller.ComponentLifetime}\nCheckInterval: {Controller.CheckInterval}\n";
+            status += string.Join( "\n", _durabilities.Select( p => p.Key.parent.LabelCap + ": " + p.Value.ToStringPercent() ).ToArray() );
+            
+            Rect statusRect = new Rect( 0f, Screen.height * 1/4f, Screen.width * 1/2f, Screen.height * 1/2f );
+            Widgets.Label( statusRect, status );
         }
 #endif
 

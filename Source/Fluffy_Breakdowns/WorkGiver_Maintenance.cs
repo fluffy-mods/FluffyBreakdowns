@@ -21,13 +21,13 @@ namespace Fluffy_Breakdowns
 
         #region Methods
 
-        public override bool HasJobOnThing( Pawn pawn, Thing thing )
+        public override bool HasJobOnThing( Pawn pawn, Thing thing, bool forced = false )
         {
             if ( thing.Faction != pawn.Faction )
                 return false;
 
-            if ( pawn.Faction == Faction.OfPlayer && Controller.MaintenanceHomeOnly &&
-                 !pawn.Map.areaManager.Home[thing.Position] )
+            if ( pawn.Faction == Faction.OfPlayer && Controller.Settings.MaintainHomeOnly &&
+                 !pawn.Map.areaManager.Home[thing.Position] && !forced )
                 return false;
 
             if ( thing.IsBurning() )
@@ -44,25 +44,30 @@ namespace Fluffy_Breakdowns
             if ( comp == null )
                 return false;
 
-            if ( !MapComponent_Durability.RequiresMaintenance( comp ) )
+            if ( !MapComponent_Durability.ForMap( thing.Map ).RequiresMaintenance( comp ) )
                 return false;
 
-            if ( !pawn.CanReserveAndReach( thing, PathEndMode.Touch, pawn.NormalMaxDanger() ) )
+            if ( !pawn.CanReserveAndReach( thing, PathEndMode.Touch, pawn.NormalMaxDanger(), 1, -1, null, forced ) )
                 return false;
 
             return true;
         }
 
-        public override Job JobOnThing( Pawn pawn, Thing thing ) { return new Job( JobDefOf_Maintain, thing ); }
-
-        public override IEnumerable<Thing> PotentialWorkThingsGlobal( Pawn Pawn )
+        public override Job JobOnThing( Pawn pawn, Thing thing, bool forced )
         {
-            return MapComponent_Durability.potentialMaintenanceThings;
+            // Overriding reservations for player given orders appear to be handled in the ReservationManager and Utilities layers,
+            // so there's nothing to do with the forced parameter?
+            return new Job( JobDefOf_Maintain, thing );
+        }
+
+        public override IEnumerable<Thing> PotentialWorkThingsGlobal( Pawn pawn )
+        {
+            return MapComponent_Durability.ForMap( pawn.Map ).potentialMaintenanceThings;
         }
 
         public override bool ShouldSkip( Pawn pawn )
         {
-            return !MapComponent_Durability.potentialMaintenanceThings.Any();
+            return !MapComponent_Durability.ForMap( pawn.Map ).potentialMaintenanceThings.Any();
         }
 
         #endregion Methods
