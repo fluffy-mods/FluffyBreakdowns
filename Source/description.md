@@ -1,8 +1,5 @@
 Replaces random breakdowns with a maintenance requirement.
 
-# Important
-This mod requires HugsLib to be installed, and loaded before it.
-
 # Features
 Buildings using components will now gradually deteriorate. The odds of a breakdown happening (and requiring replacement components), is directly linked to the amount of deterioration. 
 
