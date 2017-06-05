@@ -21,6 +21,8 @@ namespace Fluffy_Breakdowns
             var comp = map.GetComponent<MapComponent_Durability>();
             if ( comp == null )
             {
+                if ( map.components == null )
+                    return null;
                 comp = new MapComponent_Durability( map );
                 map.components.Add( comp );
             }

@@ -27,16 +27,16 @@ namespace Fluffy_Breakdowns
             yield return
                 Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
 
-            startingDurability = durability;
+            startingDurability = Durability;
             var maintenance = new Toil();
             maintenance.tickAction = delegate
                                          {
                                              Pawn pawn = maintenance.actor;
-                                             durability += pawn.GetStatValue( StatDefOf.ConstructionSpeed ) /
+                                             Durability += pawn.GetStatValue( StatDefOf.ConstructionSpeed ) /
                                                            fullRepairTicks;
                                              pawn.skills.Learn( SkillDefOf.Construction, 0.125f );
 
-                                             if ( durability > .99f )
+                                             if ( Durability > .99f )
                                              {
                                                  EndJobWith( JobCondition.Succeeded );
                                                  pawn.records.Increment( RecordDefOf.ThingsRepaired );
@@ -51,19 +51,19 @@ namespace Fluffy_Breakdowns
         public float progress()
         {
             // actual progress / possible progress
-            return ( durability - startingDurability ) / ( 1f - startingDurability );
+            return ( Durability - startingDurability ) / ( 1f - startingDurability );
         }
 
         #endregion Methods
 
         #region Properties
 
-        public CompBreakdownable comp => TargetA.Thing?.TryGetComp<CompBreakdownable>();
+        public CompBreakdownable Comp => TargetA.Thing?.TryGetComp<CompBreakdownable>();
 
-        public float durability
+        public float Durability
         {
-            get { return MapComponent_Durability.ForMap( comp.parent.Map ).GetDurability( comp ); }
-            set { MapComponent_Durability.ForMap( comp.parent.Map ).SetDurability( comp, value ); }
+            get { return MapComponent_Durability.ForMap( Comp?.parent.Map )?.GetDurability( Comp ) ?? 0f; }
+            set { MapComponent_Durability.ForMap( Comp?.parent.Map )?.SetDurability( Comp, value ); }
         }
 
         #endregion Properties
