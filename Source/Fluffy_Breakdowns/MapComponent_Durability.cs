@@ -18,11 +18,12 @@ namespace Fluffy_Breakdowns
 
         public static MapComponent_Durability ForMap( Map map )
         {
+            if (map == null)
+                return null;
+
             var comp = map.GetComponent<MapComponent_Durability>();
             if ( comp == null )
             {
-                if ( map.components == null )
-                    return null;
                 comp = new MapComponent_Durability( map );
                 map.components.Add( comp );
             }
