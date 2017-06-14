@@ -10,6 +10,9 @@
     <emergency>false</emergency>
     <verb>maintain</verb>
     <gerund>maintaining</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
   </WorkGiverDef>
 
 </WorkGivers>
