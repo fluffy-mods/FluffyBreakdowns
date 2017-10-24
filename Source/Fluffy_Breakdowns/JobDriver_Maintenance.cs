@@ -21,27 +21,31 @@ namespace Fluffy_Breakdowns
 
         #region Methods
 
+        public override bool TryMakePreToilReservations()
+        {
+            return this.pawn.Reserve( job.targetA, job );
+        }
+
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            yield return Toils_Reserve.Reserve( TargetIndex.A ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
-            yield return
-                Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
+            this.FailOnDespawnedNullOrForbidden( TargetIndex.A );
+            yield return Toils_Goto.GotoThing( TargetIndex.A, PathEndMode.Touch ).FailOnDespawnedNullOrForbidden( TargetIndex.A );
 
             startingDurability = Durability;
             var maintenance = new Toil();
             maintenance.tickAction = delegate
                                          {
                                              Pawn pawn = maintenance.actor;
-                                             Durability += pawn.GetStatValue( StatDefOf.ConstructionSpeed ) /
-                                                           fullRepairTicks;
+                                             Durability += pawn.GetStatValue( StatDefOf.ConstructionSpeed ) / fullRepairTicks;
                                              pawn.skills.Learn( SkillDefOf.Construction, 0.125f );
 
                                              if ( Durability > .99f )
                                              {
-                                                 EndJobWith( JobCondition.Succeeded );
                                                  pawn.records.Increment( RecordDefOf.ThingsRepaired );
+                                                 pawn.jobs.EndCurrentJob( JobCondition.Succeeded );
                                              }
                                          };
+            maintenance.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             maintenance.WithEffect( TargetThingA.def.repairEffect, TargetIndex.A );
             maintenance.WithProgressBar( TargetIndex.A, progress, true );
             maintenance.defaultCompleteMode = ToilCompleteMode.Never;
