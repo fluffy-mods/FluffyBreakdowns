@@ -15,6 +15,9 @@ namespace Fluffy_Breakdowns
                 float durabilityLoss = (float)Controller.CheckInterval / (float)Controller.ComponentLifetime;
                 if (!__instance.InUse())
                     durabilityLoss *= MapComponent_Durability.notUsedFactor;
+
+                durabilityLoss *= __instance.MaintenanceComplexityFactor();
+
                 __instance.DurabilityLoss( durabilityLoss );
 
                 // durability below 50%, increasing chance of breakdown ( up to almost guaranteed at 1% (minimum) maintenance.

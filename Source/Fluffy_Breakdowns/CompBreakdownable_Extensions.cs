@@ -2,13 +2,14 @@
 // // CompMaintainanceBreakdown.cs
 // // 2016-12-18
 
+using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace Fluffy_Breakdowns
 {
-    public static class CompBreakdownableMaintenance
+    public static class CompBreakdownable_Extensions
     {
         internal static float Durability(this CompBreakdownable _this )
         {
@@ -27,6 +28,34 @@ namespace Fluffy_Breakdowns
         internal static void DurabilityLoss( this CompBreakdownable _this, float loss )
         {
             _this.Durability( _this.Durability() - loss );
+        }
+
+        internal static float MaintenanceComplexityFactor( this CompBreakdownable _this )
+        {
+            if ( _this?.parent == null )
+                return 1f;
+
+            return UnityEngine.Mathf.Sqrt( _this.parent.def.ComponentCount() / 2f );
+        }
+
+        internal static Dictionary<ThingDef, int> _cachedComponentCounts = new Dictionary<ThingDef, int>();
+
+        internal static int ComponentCount( this ThingDef def )
+        {
+            int result;
+            if ( _cachedComponentCounts.TryGetValue( def, out result ) )
+                return result;
+
+            // find the component count
+            ThingCountClass componentCount = def?.costList?.Find( tc => tc.thingDef == ThingDefOf.Component );
+            if ( componentCount != null )
+                result = componentCount.count;
+            else
+                result = 2; // otherwise assume 2 components.
+
+            // cache
+            _cachedComponentCounts.Add(def, result);
+            return result;
         }
 
         public static bool InUse( this CompBreakdownable _this )
