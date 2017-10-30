@@ -6,9 +6,10 @@ namespace Fluffy_Breakdowns
 {
     public class Settings : ModSettings
     {
-        public float MaintenanceThreshold = .7f;
-        public bool MaintainHomeOnly = true;
-        public float ComponentLifetime = 1f;
+        public static float MaintenanceThreshold = .7f;
+        public static bool MaintainHomeOnly = true;
+        public static float ComponentLifetime = 1f;
+        public static float NotUsedFactor = 1 / 3f;
 
         public void DoWindowContents( Rect canvas )
         {
@@ -17,8 +18,12 @@ namespace Fluffy_Breakdowns
             list.Begin( canvas );
 
             // difficulty setting
-            list.Label( "FluffyBreakdowns.ComponentLifetimeRatio".Translate( ComponentLifetime.ToStringPercent() ) );
+            list.Label( "FluffyBreakdowns.ComponentLifetimeFactor".Translate( ComponentLifetime.ToStringPercent() ) );
             ComponentLifetime = list.Slider( ComponentLifetime, .5f, 2f );
+
+            // not used degradation factor
+            list.Label("FluffyBreakdowns.NotUsedFactor".Translate(NotUsedFactor.ToStringPercent()));
+            NotUsedFactor = list.Slider(NotUsedFactor, 0f, 1f);
 
             // maintenance threshold
             list.Label( "FluffyBreakdowns.MaintenanceThreshold".Translate( MaintenanceThreshold.ToStringPercent() ) );
@@ -48,6 +53,7 @@ namespace Fluffy_Breakdowns
             Scribe_Values.Look( ref MaintenanceThreshold, "threshold", .7f );
             Scribe_Values.Look( ref MaintainHomeOnly, "homeOnly", true );
             Scribe_Values.Look( ref ComponentLifetime, "componentLifetime", 1f );
+            Scribe_Values.Look( ref NotUsedFactor, "notUsedFactor", 1 / 3f );
         }
 
         #endregion

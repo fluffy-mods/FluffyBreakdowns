@@ -35,7 +35,7 @@ namespace Fluffy_Breakdowns
             if ( _this?.parent == null )
                 return 1f;
 
-            return UnityEngine.Mathf.Sqrt( _this.parent.def.ComponentCount() / 2f );
+            return Mathf.Sqrt( _this.parent.def.ComponentCount() / 2f );
         }
 
         internal static Dictionary<ThingDef, int> _cachedComponentCounts = new Dictionary<ThingDef, int>();

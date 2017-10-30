@@ -14,7 +14,7 @@ namespace Fluffy_Breakdowns
             {
                 float durabilityLoss = (float)Controller.CheckInterval / (float)Controller.ComponentLifetime;
                 if (!__instance.InUse())
-                    durabilityLoss *= MapComponent_Durability.notUsedFactor;
+                    durabilityLoss *= Settings.NotUsedFactor;
 
                 durabilityLoss *= __instance.MaintenanceComplexityFactor();
 

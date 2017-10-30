@@ -2,13 +2,14 @@
 <LanguageData>
 
 	<FluffyBreakdowns.Maintenance>Maintenance: {0}</FluffyBreakdowns.Maintenance>
-	
-	<FluffyBreakdowns.ComponentLifetimeRatio>Base component lifetime ({0})</FluffyBreakdowns.ComponentLifetimeRatio>
+
+	<FluffyBreakdowns.ComponentLifetimeFactor>Base component lifetime ({0})</FluffyBreakdowns.ComponentLifetimeFactor>
+	<FluffyBreakdowns.NotUsedFactor>Powered off buildings maintenance degradation factor ({0})</FluffyBreakdowns.NotUsedFactor>
 
 	<FluffyBreakdowns.MaintenanceThreshold>Maintenance threshold ({0})</FluffyBreakdowns.MaintenanceThreshold>
 	<FluffyBreakdowns.MaintenanceThresholdTip>Colonists with the repair skill will start repairing buildings when maintenance is below this threshold.</FluffyBreakdowns.MaintenanceThresholdTip>
 	<FluffyBreakdowns.LowMaintenanceThreshold>Warning: Threshold very low!</FluffyBreakdowns.LowMaintenanceThreshold>
 
-	<FluffyBreakdowns.MaintenanceHome>Maintain home only</FluffyBreakdowns.MaintenanceHome>
+	<FluffyBreakdowns.MaintenanceHome>Maintain in home area only</FluffyBreakdowns.MaintenanceHome>
 	<FluffyBreakdowns.MaintenanceHomeTip>If disabled, colonists will maintain equipment whereever it is.</FluffyBreakdowns.MaintenanceHomeTip>
 </LanguageData>

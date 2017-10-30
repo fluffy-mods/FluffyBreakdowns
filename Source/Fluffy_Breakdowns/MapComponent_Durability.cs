@@ -32,7 +32,6 @@ namespace Fluffy_Breakdowns
 
         #region Fields
 
-        public const float notUsedFactor = 1 / 3f;
         private const int _moteIntervalRequiresCriticalRepair = 15;
         private const int _moteIntervalRequiresRepair = 30;
         private Dictionary<CompBreakdownable, float> _durabilities = new Dictionary<CompBreakdownable, float>();
@@ -125,7 +124,7 @@ namespace Fluffy_Breakdowns
 
         public bool RequiresMaintenance( CompBreakdownable comp )
         {
-            return GetDurability( comp ) < Controller.Settings.MaintenanceThreshold;
+            return GetDurability( comp ) < Settings.MaintenanceThreshold;
         }
 
         public void SetDurability( CompBreakdownable comp, float durability )
@@ -145,7 +144,7 @@ namespace Fluffy_Breakdowns
         {
             base.MapComponentOnGUI();
 
-            string status = $"Threshold: {Controller.Settings.MaintenanceThreshold}\nHomeOnly: {Controller.Settings.MaintainHomeOnly}\n";
+            string status = $"Threshold: {Settings.MaintenanceThreshold}\nHomeOnly: {Settings.MaintainHomeOnly}\n";
             status += $"ComponentLifetime: {Controller.ComponentLifetime}\nCheckInterval: {Controller.CheckInterval}\n";
             status += string.Join( "\n", _durabilities.Select( p => p.Key.parent.LabelCap + ": " + p.Value.ToStringPercent() ).ToArray() );
             

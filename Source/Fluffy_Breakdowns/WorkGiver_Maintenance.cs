@@ -26,7 +26,7 @@ namespace Fluffy_Breakdowns
             if ( thing.Faction != pawn.Faction )
                 return false;
 
-            if ( pawn.Faction == Faction.OfPlayer && Controller.Settings.MaintainHomeOnly &&
+            if ( pawn.Faction == Faction.OfPlayer && Settings.MaintainHomeOnly &&
                  !pawn.Map.areaManager.Home[thing.Position] && !forced )
                 return false;
 
