@@ -12,11 +12,15 @@ namespace Fluffy_Breakdowns
     {
         internal static float Durability(this CompBreakdownable _this )
         {
+            if ( _this?.parent?.Map == null )
+                return 1f;
             return MapComponent_Durability.ForMap( _this.parent.Map ).GetDurability( _this );
         }
 
         internal static void Durability( this CompBreakdownable _this, float value )
         {
+            if (_this?.parent?.Map == null)
+                return;
             MapComponent_Durability.ForMap( _this.parent.Map ).SetDurability( _this, value );
         }
 
