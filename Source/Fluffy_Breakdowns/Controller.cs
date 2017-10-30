@@ -28,22 +28,15 @@ namespace Fluffy_Breakdowns
         public static int CheckInterval = BreakdownManager.CheckIntervalTicks;
 
 #if DEBUG
-        public static int ComponentLifetime = GenDate.TicksPerDay;
+        private const int _baseComponentLifeTime = GenDate.TicksPerDay;
 #else
-        public static int ComponentLifetime = GenDate.TicksPerSeason;
+        private const int _baseComponentLifeTime = GenDate.TicksPerSeason;
 #endif
+        public static float researchFactor = 1f;
+        public static int ComponentLifetime => (int)(_baseComponentLifeTime * Settings.ComponentLifetime * researchFactor);
 
         public override string SettingsCategory() { return "Fluffy Breakdowns"; }
         public override void DoSettingsWindowContents( Rect canvas ) { Settings.DoWindowContents( canvas ); }
-
-        // todo; verify that vanilla now correctly injects new (map)components into existing save games.
-        //public override void MapLoaded( Map map )
-        //{
-        //    base.MapLoaded( map );
-
-        //    if ( map.GetComponent<MapComponent_Durability>() == null )
-        //        map.components.Add( new MapComponent_Durability( map ) );
-        //}
         
     }
 }

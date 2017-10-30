@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using JetBrains.Annotations;
-using RimWorld;
-using Verse;
+﻿using Verse;
 
 namespace Fluffy_Breakdowns
 {
     public class ComponentLifetimeOne : ResearchMod
     {
-        // components degrade 100% over 6 months
-        public override void Apply() { Controller.ComponentLifetime = GenDate.TicksPerSeason * 2; }
+        public override void Apply()
+        {
+            Logger.Debug( "Applying research 1"  );
+            Logger.Debug( "\t Current lifetime: " + Controller.ComponentLifetime  );
+            Controller.researchFactor = 2;
+            Logger.Debug("\t New lifetime: " + Controller.ComponentLifetime);
+        }
     }
 
     public class ComponentLifetimeTwo : ResearchMod
     {
-        // components degrade 100% over a year
-        public override void Apply() { Controller.ComponentLifetime = GenDate.TicksPerYear; }
+        public override void Apply()
+        {
+            Logger.Debug("Applying research 2");
+            Logger.Debug("\t Current lifetime: " + Controller.ComponentLifetime);
+            Controller.researchFactor = 4;
+            Logger.Debug("\t New lifetime: " + Controller.ComponentLifetime);
+        }
     }
 }

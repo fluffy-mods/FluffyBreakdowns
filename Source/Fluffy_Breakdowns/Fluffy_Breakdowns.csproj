@@ -54,6 +54,7 @@
     <Compile Include="HarmonyPatch_CompInspectStringExtra.cs" />
     <Compile Include="JobDriver_Maintenance.cs" />
     <Compile Include="CompBreakdownableMaintenance.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MapComponent_Durability.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResearchWorkers.cs" />
