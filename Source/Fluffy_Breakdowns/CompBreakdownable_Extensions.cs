@@ -47,7 +47,7 @@ namespace Fluffy_Breakdowns
                 return result;
 
             // find the component count
-            ThingCountClass componentCount = def?.costList?.Find( tc => tc.thingDef == ThingDefOf.Component );
+            ThingDefCountClass componentCount = def?.costList?.Find( tc => tc.thingDef == ThingDefOf.ComponentIndustrial );
             if ( componentCount != null )
                 result = componentCount.count;
             else

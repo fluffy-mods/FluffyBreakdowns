@@ -65,7 +65,7 @@ namespace Fluffy_Breakdowns
             return MapComponent_Durability.ForMap( pawn.Map ).potentialMaintenanceThings;
         }
 
-        public override bool ShouldSkip( Pawn pawn )
+        public override bool ShouldSkip( Pawn pawn, bool forced )
         {
             return !MapComponent_Durability.ForMap( pawn.Map ).potentialMaintenanceThings.Any();
         }
