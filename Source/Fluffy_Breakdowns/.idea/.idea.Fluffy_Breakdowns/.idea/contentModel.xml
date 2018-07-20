@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Karel\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Fluffy_Breakdowns.-179409063.00" t="ExcludeRecursive" />
-    <e p="D:\NextCloud\Other\RW_Mods\Fluffy Mods\FluffyBreakdowns\Assemblies" t="ExcludeRecursive" />
-    <e p="D:\NextCloud\Other\RW_Mods\Fluffy Mods\FluffyBreakdowns\Source\Fluffy_Breakdowns" t="IncludeRecursive">
+    <e p="C:\Users\Karel\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Fluffy_Breakdowns.-714904949.00" t="ExcludeRecursive" />
+    <e p="D:\Dropbox\Mods\Fluffy Mods\FluffyBreakdowns\Assemblies" t="ExcludeRecursive" />
+    <e p="D:\Dropbox\Mods\Fluffy Mods\FluffyBreakdowns\Source\Fluffy_Breakdowns" t="IncludeRecursive">
       <e p="CompBreakdownable_Extensions.cs" t="Include" />
       <e p="Controller.cs" t="Include" />
       <e p="Fluffy_Breakdowns.csproj" t="IncludeRecursive" />
