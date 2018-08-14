@@ -11,7 +11,7 @@
 			<li Class="Fluffy_Breakdowns.ComponentLifetimeOne"></li>
 		</researchMods>
 		<prerequisites>
-			<li>ElectricSmelting</li>
+			<li>Electricity</li>
 		</prerequisites>
 		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
 		<researchViewX>7</researchViewX>

@@ -21,7 +21,7 @@ namespace Fluffy_Breakdowns
 
         #region Methods
 
-        public override bool TryMakePreToilReservations()
+        public override bool TryMakePreToilReservations( bool errorOnFailed )
         {
             return this.pawn.Reserve( job.targetA, job );
         }
