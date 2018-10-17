@@ -3,7 +3,7 @@
   <name>Fluffy Breakdowns</name>
   <author>Fluffy</author>
   <url>https://ludeon.com/forums/index.php?topic=16120.0</url>
-  <targetVersion>1.0.2057</targetVersion>
+  <targetVersion>1.0.2059</targetVersion>
   <description>Replaces random breakdowns with a maintenance requirement.
 
 &lt;size=24&gt;Features&lt;/size&gt;
@@ -25,7 +25,7 @@ Well-sp:    Russian translation
 53N4:    Spanish translation
 
 &lt;size=24&gt;Version&lt;/size&gt;
-This is version 3.0.43, for RimWorld 1.0.2057.
+This is version 3.1.44, for RimWorld 1.0.2059.
 
 </description>
 </ModMetaData>
