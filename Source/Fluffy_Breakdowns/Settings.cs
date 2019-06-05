@@ -19,7 +19,7 @@ namespace Fluffy_Breakdowns
 
             // difficulty setting
             list.Label( "FluffyBreakdowns.ComponentLifetimeFactor".Translate( ComponentLifetime.ToStringPercent() ) );
-            ComponentLifetime = list.Slider( ComponentLifetime, .5f, 2f );
+            ComponentLifetime = list.Slider( ComponentLifetime, .1f, 10f );
 
             // not used degradation factor
             list.Label("FluffyBreakdowns.NotUsedFactor".Translate(NotUsedFactor.ToStringPercent()));
