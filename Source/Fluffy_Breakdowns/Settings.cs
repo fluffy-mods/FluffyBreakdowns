@@ -1,4 +1,3 @@
-using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -7,35 +6,47 @@ namespace Fluffy_Breakdowns
     public class Settings : ModSettings
     {
         public static float MaintenanceThreshold = .7f;
-        public static bool MaintainHomeOnly = true;
-        public static float ComponentLifetime = 1f;
-        public static float NotUsedFactor = 1 / 3f;
+        public static bool  MaintainHomeOnly     = true;
+        public static float ComponentLifetime    = 1f;
+        public static float NotUsedFactor        = 1 / 3f;
 
         public void DoWindowContents( Rect canvas )
         {
-            Listing_Standard list = new Listing_Standard();
+            var list = new Listing_Standard();
             list.ColumnWidth = canvas.width;
             list.Begin( canvas );
 
             // difficulty setting
             list.Label( "FluffyBreakdowns.ComponentLifetimeFactor".Translate( ComponentLifetime.ToStringPercent() ) );
             ComponentLifetime = list.Slider( ComponentLifetime, .1f, 10f );
+            if ( ComponentLifetime < .5f || ComponentLifetime > 2f )
+            {
+                var msg = ComponentLifetime > 1
+                    ? "Fluffy.Breakdowns.HighComponentLifetime".Translate()
+                    : "Fluffy.Breakdowns.LowComponentLifetime".Translate();
+                GUI.color = Color.red;
+                Text.Font = GameFont.Tiny;
+                list.Label( msg );
+                Text.Font = GameFont.Small;
+                GUI.color = Color.white;
+            }
 
             // not used degradation factor
-            list.Label("FluffyBreakdowns.NotUsedFactor".Translate(NotUsedFactor.ToStringPercent()));
-            NotUsedFactor = list.Slider(NotUsedFactor, 0f, 1f);
+            list.Label( "FluffyBreakdowns.NotUsedFactor".Translate( NotUsedFactor.ToStringPercent() ) );
+            NotUsedFactor = list.Slider( NotUsedFactor, 0f, 1f );
 
             // maintenance threshold
             list.Label( "FluffyBreakdowns.MaintenanceThreshold".Translate( MaintenanceThreshold.ToStringPercent() ) );
             MaintenanceThreshold = list.Slider( MaintenanceThreshold, 0, 1 );
             if ( MaintenanceThreshold < .3f )
             {
-                GUI.contentColor = Color.red;
+                GUI.color = Color.red;
                 Text.Font = GameFont.Tiny;
                 list.Label( "FluffyBreakdowns.LowMaintenanceThreshold".Translate() );
                 Text.Font = GameFont.Small;
-                GUI.contentColor = Color.white;
+                GUI.color = Color.white;
             }
+
             list.Gap();
 
             // maintain home only?
@@ -45,8 +56,6 @@ namespace Fluffy_Breakdowns
             list.End();
         }
 
-        #region Overrides of ModSettings
-
         public override void ExposeData()
         {
             base.ExposeData();
@@ -55,7 +64,5 @@ namespace Fluffy_Breakdowns
             Scribe_Values.Look( ref ComponentLifetime, "componentLifetime", 1f );
             Scribe_Values.Look( ref NotUsedFactor, "notUsedFactor", 1 / 3f );
         }
-
-        #endregion
     }
 }
