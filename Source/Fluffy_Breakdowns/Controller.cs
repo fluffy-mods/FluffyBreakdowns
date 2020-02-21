@@ -3,7 +3,7 @@
 // // 2016-12-18
 
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -15,7 +15,7 @@ namespace Fluffy_Breakdowns
         public Controller( ModContentPack content ) : base( content )
         {
             // detour CheckForBreakdown
-            var harmony = HarmonyInstance.Create( "fluffy.breakdowns" );
+            var harmony = new Harmony( "fluffy.breakdowns" );
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             // provide settings
