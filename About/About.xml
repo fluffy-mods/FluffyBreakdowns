@@ -2,7 +2,7 @@
 <ModMetaData>
   <name>Fluffy Breakdowns</name>
   <author>Fluffy</author>
-  <url>https://ludeon.com/forums/index.php?topic=16120.0</url>
+  <url>https://ludeon.com/forums/index.php?topic=16120</url>
   <packageId>fluffy.fluffybreakdowns</packageId>
   <description>Replaces random breakdowns with a maintenance requirement.
 
@@ -28,7 +28,7 @@ Phezzan:    Extend base component lifetime range
 Blopi:    French translation
 
 &lt;size=24&gt;Version&lt;/size&gt;
-This is version 4.3.53, for RimWorld 1.1.2559.
+This is version 4.3.53, for RimWorld 1.1.2652.
 
 </description>
   <supportedVersions>
