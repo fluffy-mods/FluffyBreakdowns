@@ -160,7 +160,7 @@ namespace Fluffy_Breakdowns
             int tick = Find.TickManager.TicksGame;
             var orphaned = new List<CompBreakdownable>();
 
-            foreach ( KeyValuePair<CompBreakdownable, float> _dur in _durabilities )
+            foreach ( KeyValuePair<CompBreakdownable, float> _dur in _durabilities.ToList())
             {
                 float durability = _dur.Value;
                 CompBreakdownable comp = _dur.Key;
