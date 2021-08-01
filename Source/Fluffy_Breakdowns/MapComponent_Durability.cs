@@ -167,10 +167,10 @@ namespace Fluffy_Breakdowns
                 if ( comp?.parent?.Spawned ?? false )
                 {
                     if ( durability < .5 && ( tick + comp.GetHashCode() ) % _moteIntervalRequiresRepair == 0 )
-                        MoteMaker.ThrowSmoke( comp.parent.DrawPos, map, ( 1f - durability ) * 1 / 2f );
+                        FleckMaker.ThrowSmoke( comp.parent.DrawPos, map, ( 1f - durability ) * 1 / 2f );
 
                     if ( durability < .25 && ( tick + comp.GetHashCode() ) % _moteIntervalRequiresCriticalRepair == 0 )
-                        MoteMaker.ThrowMicroSparks( comp.parent.DrawPos, map );
+                        FleckMaker.ThrowMicroSparks( comp.parent.DrawPos, map );
                 }
 
                 // can't simply use !Spawned, since that would allow resetting durability by moving furniture.
