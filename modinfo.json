@@ -5,7 +5,7 @@
     "url": "https://github.com/fluffy-mods/FluffyBreakdowns",
     "version": {
         "major": 4,
-        "minor": 4,
+        "minor": 5,
         "build": 62
     },
     "author": {
@@ -19,6 +19,15 @@
         "url": "https://github.com/fluffy-mods/FluffyBreakdowns"
     },
     "changelog": [
+        {
+            "date": "2022-10-14T21:07:01.000Z",
+            "message": "initial 1.4 build, update code formatting, project structure, etc.",
+            "author": {
+                "name": "Fluffy",
+                "email": "fluffy.l2032@gmail.com"
+            },
+            "hash": "2ae10b67cb756046d33bf59725e718262bd8ddb8"
+        },
         {
             "date": "2022-10-14T20:41:44.000Z",
             "message": "refactor source files, up references for 1.4",
