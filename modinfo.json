@@ -1,0 +1,16 @@
+{
+    "name": "Fluffy Breakdowns",
+    "sourceDir": ".",
+    "targetDir": "FluffyBreakdowns",
+    "url": "https://github.com/fluffy-mods/FluffyBreakdowns",
+    "version": {
+        "major": 4,
+        "minor": 4,
+        "build": 58
+    },
+    "author": {
+        "name": "Fluffy",
+        "url": "https://github.com/fluffy-mods/",
+        "email": "fluffy.l2032@gmail.com"
+    }
+}
