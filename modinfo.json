@@ -6,11 +6,91 @@
     "version": {
         "major": 4,
         "minor": 4,
-        "build": 58
+        "build": 62
     },
     "author": {
         "name": "Fluffy",
         "url": "https://github.com/fluffy-mods/",
         "email": "fluffy.l2032@gmail.com"
+    },
+    "git": {
+        "owner": "fluffy-mods",
+        "repo": "FluffyBreakdowns",
+        "url": "https://github.com/fluffy-mods/FluffyBreakdowns"
+    },
+    "changelog": [
+        {
+            "date": "2022-10-14T20:41:44.000Z",
+            "message": "refactor source files, up references for 1.4",
+            "author": {
+                "name": "Fluffy",
+                "email": "fluffy.l2032@gmail.com"
+            },
+            "hash": "2933ac248b0c66105d0055e0029c9c689e8c241b"
+        }
+    ],
+    "contributions": [
+        {
+            "hash": "6c87e5c51b7d50e56209e3c5ee39ee58df724cee",
+            "author": "Phezzan",
+            "description": "increase component lifetime slider range (#27)"
+        },
+        {
+            "hash": "35a7d35a03bdbd96e9361a73195be9edd3331ed6",
+            "author": "rw-chaos",
+            "description": "Added German translation (#24)"
+        },
+        {
+            "hash": "80d9345e61b55e8181a102a5f72e03cd897dae35",
+            "author": "53N4",
+            "description": "Spanish translation (#23)"
+        },
+        {
+            "hash": "df05f008cd6e0ab59b54db847569ea7df3178c8c",
+            "author": "Gabriel David",
+            "description": "Add Portuguese (pt-br) transaltion (#12)"
+        },
+        {
+            "hash": "12f8d39e384836f16a381141b3a231dfc6e35070",
+            "author": "duduluu",
+            "description": "Add Chinese translations (#11)"
+        }
+    ],
+    "contributors": {
+        "Phezzan": [
+            {
+                "hash": "6c87e5c",
+                "author": "Phezzan",
+                "description": "increase component lifetime slider range (#27)"
+            }
+        ],
+        "rw-chaos": [
+            {
+                "hash": "35a7d35",
+                "author": "rw-chaos",
+                "description": "Added German translation (#24)"
+            }
+        ],
+        "53N4": [
+            {
+                "hash": "80d9345",
+                "author": "53N4",
+                "description": "Spanish translation (#23)"
+            }
+        ],
+        "Gabriel David": [
+            {
+                "hash": "df05f00",
+                "author": "Gabriel David",
+                "description": "Add Portuguese (pt-br) transaltion (#12)"
+            }
+        ],
+        "duduluu": [
+            {
+                "hash": "12f8d39",
+                "author": "duduluu",
+                "description": "Add Chinese translations (#11)"
+            }
+        ]
     }
 }

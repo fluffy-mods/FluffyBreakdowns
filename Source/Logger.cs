@@ -1,13 +1,11 @@
-﻿// Logger.cs
+// Logger.cs
 // Copyright Karel Kroeze, 2017-2017
 
 using System.Diagnostics;
 using Verse;
 
-namespace Fluffy_Breakdowns
-{
-    public static class Logger
-    {
+namespace Fluffy_Breakdowns {
+    public static class Logger {
         public static string Identifier => "Breakdowns";
 
         public static string FormatMessage(string msg) { return Identifier + " :: " + msg; }
@@ -18,8 +16,7 @@ namespace Fluffy_Breakdowns
         [Conditional("TRACE")]
         public static void Trace(string msg) { Log.Error(FormatMessage(msg)); }
 
-        public static void Error(string msg)
-        {
+        public static void Error(string msg) {
             Log.Error(FormatMessage(msg));
         }
 
