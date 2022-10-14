@@ -5,7 +5,7 @@
     "url": "https://github.com/fluffy-mods/FluffyBreakdowns",
     "version": {
         "major": 4,
-        "minor": 5,
+        "minor": 6,
         "build": 62
     },
     "author": {
@@ -19,6 +19,15 @@
         "url": "https://github.com/fluffy-mods/FluffyBreakdowns"
     },
     "changelog": [
+        {
+            "date": "2022-10-14T21:10:38.000Z",
+            "message": "remove experiment popup code",
+            "author": {
+                "name": "Fluffy",
+                "email": "fluffy.l2032@gmail.com"
+            },
+            "hash": "76cf024d42500c450998a68230ca7a03e34cc56d"
+        },
         {
             "date": "2022-10-14T21:07:01.000Z",
             "message": "initial 1.4 build, update code formatting, project structure, etc.",
