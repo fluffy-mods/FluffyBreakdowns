@@ -31,7 +31,7 @@ namespace Fluffy_Breakdowns {
             maintenance.tickAction = delegate {
                 Pawn pawn = maintenance.actor;
                 Durability += pawn.GetStatValue(StatDefOf.ConstructionSpeed) / fullRepairTicks;
-                pawn.skills.Learn(SkillDefOf.Construction, 0.125f);
+                pawn.skills?.Learn(SkillDefOf.Construction, 0.125f);
 
                 if (Durability > .99f) {
                     pawn.records.Increment(RecordDefOf.ThingsRepaired);
