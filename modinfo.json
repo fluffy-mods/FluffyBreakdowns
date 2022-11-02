@@ -5,8 +5,8 @@
     "url": "https://github.com/fluffy-mods/FluffyBreakdowns",
     "version": {
         "major": 4,
-        "minor": 6,
-        "build": 62
+        "minor": 7,
+        "build": 63
     },
     "author": {
         "name": "Fluffy",
@@ -19,6 +19,15 @@
         "url": "https://github.com/fluffy-mods/FluffyBreakdowns"
     },
     "changelog": [
+        {
+            "date": "2022-11-02T19:54:02.000Z",
+            "message": "Fix bug with mechanoids doing maintenance",
+            "author": {
+                "name": "Moon",
+                "email": "64121399+MoonTheBird@users.noreply.github.com"
+            },
+            "hash": "e3465a20a6f1c47ef80776d49adbe84de89b27b1"
+        },
         {
             "date": "2022-10-14T21:10:38.000Z",
             "message": "remove experiment popup code",
@@ -72,6 +81,11 @@
             "hash": "12f8d39e384836f16a381141b3a231dfc6e35070",
             "author": "duduluu",
             "description": "Add Chinese translations (#11)"
+        },
+        {
+            "hash": "e3465a20a6f1c47ef80776d49adbe84de89b27b1",
+            "author": "Moon",
+            "description": "Fix bug with mechanoids doing maintenance"
         }
     ],
     "contributors": {
@@ -108,6 +122,13 @@
                 "hash": "12f8d39",
                 "author": "duduluu",
                 "description": "Add Chinese translations (#11)"
+            }
+        ],
+        "Moon": [
+            {
+                "hash": "e3465a2",
+                "author": "Moon",
+                "description": "Fix bug with mechanoids doing maintenance"
             }
         ]
     }
